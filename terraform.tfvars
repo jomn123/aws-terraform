@@ -4,26 +4,28 @@ vpc_cidr = "10.16.0.0/16"
 
 subnets = {
   "web-subnet-a" = {
-    cidr_block                       = "10.16.1.0/24"
+    cidr_block                      = "10.16.1.0/24"
     assign_ipv6_address_on_creation = true
     availability_zone               = "us-east-1a"
     map_public_ip_on_launch         = true
-    tags                             = { tier = "web" }
+    tags                            = { tier = "web" }
   }
-
-  "app-subnet-b" = {
-    cidr_block                       = "10.16.2.0/24"
+  "app-subnet-a" = {
+    cidr_block                      = "10.16.2.0/24"
     assign_ipv6_address_on_creation = true
-    availability_zone               = "us-east-1b"
+    availability_zone               = "us-east-1a"
     map_public_ip_on_launch         = false
-    tags                             = { tier = "app" }
+    tags                            = { tier = "app" }
   }
-
-  "db-subnet-c" = {
-    cidr_block                       = "10.16.3.0/24"
+  "db-subnet-a" = {
+    cidr_block                      = "10.16.3.0/24"
     assign_ipv6_address_on_creation = true
-    availability_zone               = "us-east-1c"
+    availability_zone               = "us-east-1a"
     map_public_ip_on_launch         = false
-    tags                             = { tier = "db" }
+    tags                            = { tier = "db" }
   }
 }
+
+public_subnets     = ["web-subnet-a"]
+private_subnets    = ["app-subnet-a", "db-subnet-a"]
+enable_nat_gateway = true
